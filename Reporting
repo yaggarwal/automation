@@ -1,0 +1,8 @@
+Extent Reports
+============
+
+1. Add below dependency in project
+
+com.aventstack
+extentreports
+3.0.3
