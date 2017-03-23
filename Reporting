@@ -83,3 +83,67 @@ public class ExtentUtil {
  
  
 }
+
+
+
+// integration with Junit
+=========================
+1. Create a Base Test class.
+2. Extend all your test cases with Base Class.
+
+import org.junit.AfterClass;
+import org.junit.AssumptionViolatedException;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.rules.TestRule;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
+ 
+import java.io.IOException;
+ 
+public class BaseTest {
+ 
+    @BeforeClass
+    public static void setUp(){
+        if (ExtentUtil.getExtentReports() == null){
+            ExtentUtil.createReporter("extentreport.html");
+        }
+    }
+ 
+    @AfterClass
+    public static void tearDown(){
+        ExtentUtil.saveReporter();
+    }
+ 
+    @Rule
+    public final TestRule testRule = new TestWatcher() {
+        @Override
+        protected void succeeded(Description description) {
+            ExtentUtil.fetchTest().pass("Passed");
+        }
+ 
+        @Override
+        protected void failed(Throwable e, Description description) {
+            try {
+                ExtentUtil.fetchTest().fail("Failed").addScreenCaptureFromPath("images/car.png");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+ 
+        @Override
+        protected void skipped(AssumptionViolatedException e, Description description) {
+ 
+        }
+ 
+        @Override
+        protected void starting(Description description) {
+            ExtentUtil.createTest(description.getMethodName());
+        }
+ 
+        @Override
+        protected void finished(Description description) {
+ 
+        }
+    };
+}
