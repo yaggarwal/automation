@@ -147,3 +147,45 @@ public class BaseTest {
         }
     };
 }
+
+
+
+Integration With TestNG
+=======================
+
+public class TestCaseWatcher extends TestListenerAdapter{
+ 
+    @Override
+    public void onTestSuccess(ITestResult tr) {
+        ExtentUtil.fetchTest().pass("Passed");
+    }
+ 
+    @Override
+    public void onTestFailure(ITestResult tr) {
+        ExtentUtil.fetchTest().fail("Failed");
+    }
+ 
+    @Override
+    public void onTestSkipped(ITestResult tr) {
+ 
+    }
+ 
+    @Override
+    public void onStart(ITestContext testContext) {
+        ExtentUtil.createReporter("extentreport.html");
+    }
+ 
+    @Override
+    public void onFinish(ITestContext testContext) {
+        ExtentUtil.saveReporter();
+    }
+ 
+    @Override
+    public void onTestStart(ITestResult result) {
+        ExtentUtil.createTest(result.getMethod().getMethodName());
+        String[] categories = result.getMethod().getGroups();
+        for (String category:categories) {
+            ExtentUtil.fetchTest().assignCategory(category);
+        }
+    }
+}
