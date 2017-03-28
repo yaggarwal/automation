@@ -20,3 +20,28 @@ All activities reocred by ZAP are stored in a local database for a particular se
 and start from where you left.
 
 
+- Download and install ZAP
+- Open Browser and set the proxy : ---  localhost, port: 8080
+
+- Add addon Foxyproxy basic for automating proxy in browser
+- Add the new proxy with the addon and set it.
+- Also set the same proxy port in ZAP too. By going to Tools -> Options 
+- You also need to generate to SSL certificate using the ZAP tool. Tools -> Options -> SSL (something). Create and save the certificate
+- Add it to the firefox. Prefernces -> Advances > certificates -> import the saved certifcate. Also select the checkox 
+
+
+ZAP tool acts as a man in the middle attack.
+1. Browser sends encrpted informaton. Say Hello as 110011
+2. ZAP intercepts it and decrypts it. It again encrypts/modified the information  using its own certificate. 110011 -> hello -> 22002 (ZAP encryoted information)
+3. ZAP send this information to the server.
+
+
+Define the scope to be tested.
+- You should not test any site which you do not have authority to test.
+- Say your site has Youtube vidoes embedded, or has cdn urls or image from diffreent hosts. Then you should not pen tests these sites. Define the 
+scope/context to just your sites.
+
+
+Testing App
+-----------
+OWASP - BWA (OWASP Broken Web Application)
