@@ -1,0 +1,22 @@
+OWASP - ZAP (Open Web Application Security Project - Zed Attack Proxy)
+=====================================================================
+
+- ZAP is a java based application
+- You can run it using .exe file, jar, .sh  or .bat file
+
+
+Override options while staring ZAP
+----------------------------------
+
+-config -  specified key-values pairs in config file
+-daemon - run in backg
+-host - specified host
+-port - specifies port
+-newsession -  start a new session . You can specify the session name
+-session - You can refer to previous session
+
+
+All activities reocred by ZAP are stored in a local database for a particular session. So you can always refer to previous session (last configuration option above)
+and start from where you left.
+
+
